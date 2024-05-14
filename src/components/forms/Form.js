@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Form = () => {
@@ -20,52 +20,40 @@ const Form = () => {
   const [validSujet, setValidSujet] = useState(false);
   const [msg, setMsg] = useState('');
   const [validMsg, setValidMsg] = useState(false);
-  const [data, setData] = useState([])
-
-  // const firstnameRef = useRef(null);
-  // const lastnameRef = useRef(null);
-  // const emailRef = useRef(null);
-  // const phoneRef = useRef(null);
-  // const sujetRef = useRef(null);
-  // const messageRef = useRef(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     setValidFirstname(nameRegex.test(firstname));
-  }, []);
+  }, [firstname, nameRegex]);
 
   useEffect(() => {
     setValidLastname(nameRegex.test(lastname));
-  }, []);
+  }, [lastname, nameRegex]);
 
   useEffect(() => {
     setValidEmail(emailRegex.test(email));
-  }, []);
+  }, [email, emailRegex]);
 
   useEffect(() => {
     setValidPhone(phoneRegex.test(phone));
-  }, []);
+  }, [phone, phoneRegex]);
 
   useEffect(() => {
     setValidSujet(sujetRegex.test(sujet));
-  }, []);
+  }, [sujet, sujetRegex]);
 
   useEffect(() => {
     setValidMsg(messageRegex.test(msg));
-  }, []);
+  }, [msg, messageRegex]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post(`http://localhost:8000/contact`, {
-    })
+    axios.post(`http://localhost:8000/contact`, {})
       .then((res) => {
         setData(res.data)
         console.log(data);
         console.log("data", res.data);
         console.log("Mise à jour réussie !");
-        // Définir le message flash
-        // setFlashMessage("Mise à jour réussie !");
-        // Redirection vers la page de tableau de bord après la modification réussie
-
       })
       .catch((error) => {
         console.error("Erreur lors de la mise à jour : ", error);
