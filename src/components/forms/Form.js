@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 
 const Form = () => {
-  const nameRegex = /^[a-zA-Z\- ]{2,}$/;
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const phoneRegex = /^\+(?:\d{1,3})?\d{10,14}$/;
-  const sujetRegex = /^[a-zA-Z0-9\s\-,.!?:;'"()]+$/;
-  const messageRegex = /^[a-zA-Z0-9\s\n\-,.!?:;'"()]+$/;
+  const nameRegex = useMemo(() => /^[a-zA-Z\- ]{2,}$/, []);
+  const emailRegex = useMemo(() => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, []);
+  const phoneRegex = useMemo(() => /^\+(?:\d{1,3})?\d{10,14}$/, []);
+  const sujetRegex = useMemo(() => /^[a-zA-Z0-9\s\-,.!?:;'"()]+$/, []);
+  const messageRegex = useMemo(() => /^[a-zA-Z0-9\s\n\-,.!?:;'"()]+$/, []);
 
   const [firstname, setFirstname] = useState('');
   const [validFirstname, setValidFirstname] = useState(false);
