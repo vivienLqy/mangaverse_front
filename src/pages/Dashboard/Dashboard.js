@@ -14,7 +14,6 @@ const Dashboard = () => {
   const [selectedOeuvre, setSelectedOeuvre] = useState(null);
   const [flashMessage, setFlashMessage] = useState(""); // Nouvelle propriété d'état pour le message flash
   const location = useLocation();
-  const { id } = useParams(); // Utilisation de useLocation pour récupérer les données de l'état
 
   const token = localStorage.getItem('token');
   const decodedToken = jwtDecode(token);
@@ -56,7 +55,7 @@ const Dashboard = () => {
       }, 5000);
       return () => clearTimeout(timeout);
     }
-  }, []);
+  }, [location.state]);
 
   const handleDelete = (productId) => {
     axios
