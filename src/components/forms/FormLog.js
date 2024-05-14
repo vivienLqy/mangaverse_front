@@ -115,7 +115,7 @@ const FormLog = () => {
     );
   }
 
-  if (currentUrl == "/register") {
+  if (currentUrl === "/register") {
     return (
       <section>
         <div className="flex flex-col items-center bg-blue-900 bg-opacity-80 p-28 text-center">

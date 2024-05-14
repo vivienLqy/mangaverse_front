@@ -143,7 +143,7 @@ const CreateAdmin = () => {
         } else {
             console.error("Veuillez sélectionner une catégorie, une œuvre et un type");
         }
-    }, [categorieId, categories, name, navigate, oeuvreId, oeuvres, prix, quantiter, typeId, types, selectedImage]);
+    }, [categorieId, categories, name, navigate, oeuvreId, oeuvres, prix, quantiter, typeId, types, selectedImage, picture]);
 
     const handleCancel = () => {
         navigate("/dashboard");
@@ -217,7 +217,7 @@ const CreateAdmin = () => {
                                         onChange={converToBase64}
                                         className="bg-transparent w-full p-2"
                                     />
-                                    {selectedImage === "" || selectedImage === null ? "" : <img width={100} height={100} src={selectedImage} />}
+                                    {selectedImage === "" || selectedImage === null ? "" : <img width={100} height={100} src={selectedImage} alt="img selectionner" />}
                                 </div>
                                 <div className="bg-blackOP30 mb-4 text-center">
                                     <input

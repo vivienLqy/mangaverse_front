@@ -22,36 +22,36 @@ const Form = () => {
   const [validMsg, setValidMsg] = useState(false);
   const [data, setData] = useState([])
 
-  const firstnameRef = useRef(null);
-  const lastnameRef = useRef(null);
-  const emailRef = useRef(null);
-  const phoneRef = useRef(null);
-  const sujetRef = useRef(null);
-  const messageRef = useRef(null);
+  // const firstnameRef = useRef(null);
+  // const lastnameRef = useRef(null);
+  // const emailRef = useRef(null);
+  // const phoneRef = useRef(null);
+  // const sujetRef = useRef(null);
+  // const messageRef = useRef(null);
 
   useEffect(() => {
     setValidFirstname(nameRegex.test(firstname));
-  }, [firstname]);
+  }, []);
 
   useEffect(() => {
     setValidLastname(nameRegex.test(lastname));
-  }, [lastname]);
+  }, []);
 
   useEffect(() => {
     setValidEmail(emailRegex.test(email));
-  }, [email]);
+  }, []);
 
   useEffect(() => {
     setValidPhone(phoneRegex.test(phone));
-  }, [phone]);
+  }, []);
 
   useEffect(() => {
     setValidSujet(sujetRegex.test(sujet));
-  }, [sujet]);
+  }, []);
 
   useEffect(() => {
     setValidMsg(messageRegex.test(msg));
-  }, [msg]);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,6 +59,7 @@ const Form = () => {
     })
       .then((res) => {
         setData(res.data)
+        console.log(data);
         console.log("data", res.data);
         console.log("Mise à jour réussie !");
         // Définir le message flash

@@ -10,8 +10,8 @@ const UpdateProduct = () => {
   const [quantiter, setQuantiter] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const { id } = useParams();
-  const navigate = useNavigate(); // Utilisation de useNavigate pour la redirection
-  const [flashMessage, setFlashMessage] = useState(""); // Nouvelle propriété d'état pour le message flash
+  const navigate = useNavigate();
+  const [flashMessage, setFlashMessage] = useState("");
 
   useEffect(() => {
     axios
@@ -42,9 +42,7 @@ const UpdateProduct = () => {
     })
       .then((res) => {
         console.log("Mise à jour réussie !");
-        // Définir le message flash
         setFlashMessage("Mise à jour réussie !");
-        // Redirection vers la page de tableau de bord après la modification réussie
         navigate("/dashboard", { state: { flashMessage: "Mise à jour réussie !" } });
 
       })
@@ -97,6 +95,9 @@ const UpdateProduct = () => {
                     <button type="button" className=" bg-red-700 rounded-md px-10 py-2 " onClick={handleCancel}>Annuler</button>
                     <button type="button" className=" bg-green-700 rounded-md px-10 py-2" onClick={handleValidation}>Valider</button>
                   </div>
+                  {flashMessage && ( // Affichage du message flash
+                    <div className="text-green-600 mt-2">{flashMessage}</div>
+                  )}
                 </form>
               </div>
             )}

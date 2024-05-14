@@ -14,23 +14,10 @@ const MonProduit = () => {
       .get(`http://localhost:8000/api/products`)
       .then((res) => {
         setProduct(res.data);
-        // console.log("all :" , res.data);
-        // setProduits(res.data["hydra:member"]);
       })
       .catch((error) => {
         console.error(
           "Une erreur s'est produite lors de la récupération des produits : ",
-          error
-        );
-      });
-    axios
-      .get(`http://localhost:8000/api/img/manga/${selectedProduct?.picture}`)
-      .then((res) => {
-        setProductImage(res.data); // Assurez-vous que votre API renvoie les données de l'image correctement
-      })
-      .catch((error) => {
-        console.error(
-          "Une erreur s'est produite lors de la récupération de l'image : ",
           error
         );
       });
@@ -41,21 +28,35 @@ const MonProduit = () => {
       (product) => product.oeuvres?.id === parseInt(id)
     );
     setFilteredProducts(filtered);
-    // console.log("filtre : " , filtered);
-    // console.log("all : ");
   }, [id, products]);
 
   const selectedProduct = filteredProducts.find(
     (product) => product.oeuvres?.id === parseInt(id)
   );
-  console.log("ayaaa", selectedProduct);
+
+  useEffect(() => {
+    if (selectedProduct?.picture) {
+      axios
+        .get(`http://localhost:8000/api/img/manga/${selectedProduct.picture}`)
+        .then((res) => {
+          setProductImage(res.data);
+        })
+        .catch((error) => {
+          console.error(
+            "Une erreur s'est produite lors de la récupération de l'image : ",
+            error
+          );
+        });
+    }
+  }, [selectedProduct?.picture]);
+
   return (
     <section className="bg-bleuDark text-white">
       <div className="flex w-1/2 m-auto ">
         <div className="">
           <img
-            src={`http://localhost:8000/api/img/manga/${selectedProduct?.picture}`}
-            alt={selectedProduct?.name}
+            src={`http://localhost:8000/api/img/manga/${selectedProduct.picture}`} // Utilisation de productImage pour afficher l'image
+            alt={productImage}
             className="w-44"
           />
         </div>
@@ -70,14 +71,6 @@ const MonProduit = () => {
               ? selectedProduct.type?.name
               : "type du produit non trouvé"}
           </p>
-          {/* <p>
-            {selectedProduct &&
-            selectedProduct.oeuvres &&
-            selectedProduct.oeuvres.genres &&
-            selectedProduct.oeuvres.genres.name ? 
-            selectedProduct.oeuvres.genres.name.map((genre, index) => (<span key={index}>{genre}</span>)):
-              "Genre du produit non trouvé"}
-          </p> */}
           <p>
             En stock :
             {selectedProduct
@@ -88,7 +81,6 @@ const MonProduit = () => {
       </div>
       <div className=" flex items-center m-auto gap-4 w-1/2 py-5">
         <p>
-          {" "}
           Prix :
           {selectedProduct
             ? selectedProduct.prix
@@ -109,7 +101,6 @@ const MonProduit = () => {
           </p>
         </p>
       </div>
-      {/* <pre>{JSON.stringify(selectedProduct, null, 2)}</pre> */}
       <div className="flex justify-center">
         <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-7">
           {filteredProducts.map((product, index) => (

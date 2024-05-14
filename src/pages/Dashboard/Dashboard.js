@@ -4,29 +4,24 @@ import PanelAdmin from "../../components/admin/PanelAdmin";
 import NavAdmin from "../../components/wrapper/NavAdmin";
 import OeuvresAdmin from "../../components/admin/OeuvresAdmin";
 import createV from "../../assets/createGreen.svg";
-import { NavLink } from "react-router-dom";
-import { useLocation, useParams } from "react-router-dom"; // Import de useLocation pour récupérer les données de l'état
-import { jwtDecode } from "jwt-decode";
+import { NavLink, useLocation } from "react-router-dom"; // Importation de NavLink et useLocation
+import { jwtDecode } from "jwt-decode"; // Importation de jwtDecode
 
-const Dashboard = () => {
-  const [products, setProducts] = useState([]);
+const TableauDeBord = () => {
+  const [produits, setProduits] = useState([]);
   const [oeuvres, setOeuvres] = useState([]);
-  const [selectedOeuvre, setSelectedOeuvre] = useState(null);
-  const [flashMessage, setFlashMessage] = useState(""); // Nouvelle propriété d'état pour le message flash
+  const [oeuvreSelectionnee, setOeuvreSelectionnee] = useState(null);
+  const [messageFlash, setMessageFlash] = useState("");
   const location = useLocation();
-  const { id } = useParams(); // Utilisation de useLocation pour récupérer les données de l'état
-
   const token = localStorage.getItem('token');
-  const decodedToken = jwtDecode(token);
-  const roles = decodedToken.roles; // Utilisez decodedToken au lieu de token pour accéder aux rôles
-
+  const tokenDecode = jwtDecode(token);
+  const roles = tokenDecode.roles;
 
   useEffect(() => {
-    // Récupérer les produits
     axios
-      .get(`http://localhost:8000/api/products`)
+      .get(`http://localhost:8000/api/produits`)
       .then((res) => {
-        setProducts(res.data);
+        setProduits(res.data);
       })
       .catch((error) => {
         console.error(
@@ -35,7 +30,6 @@ const Dashboard = () => {
         );
       });
 
-    // Récupérer les oeuvres
     axios
       .get(`http://localhost:8000/api/oeuvres`)
       .then((res) => {
@@ -48,24 +42,23 @@ const Dashboard = () => {
         );
       });
 
-    // Vérifier si un message flash est passé en tant que state depuis UpdateAdmin
-    if (location.state && location.state.flashMessage) {
-      setFlashMessage(location.state.flashMessage);
+    if (location.state && location.state.messageFlash) {
+      setMessageFlash(location.state.messageFlash);
       const timeout = setTimeout(() => {
-        setFlashMessage("");
+        setMessageFlash("");
       }, 5000);
       return () => clearTimeout(timeout);
     }
-  }, []);
+  }, [location.state]);
 
-  const handleDelete = (productId) => {
+  const supprimerProduit = (idProduit) => {
     axios
-      .delete(`http://localhost:8000/api/products/${productId}`)
+      .delete(`http://localhost:8000/api/produits/${idProduit}`)
       .then((response) => {
-        setProducts(products.filter((product) => product.id !== productId));
-        setFlashMessage("Le produit a été supprimé avec succès !");
+        setProduits(produits.filter((produit) => produit.id !== idProduit));
+        setMessageFlash("Le produit a été supprimé avec succès !");
         const timeout = setTimeout(() => {
-          setFlashMessage("");
+          setMessageFlash("");
         }, 5000);
         return () => clearTimeout(timeout);
       })
@@ -74,29 +67,27 @@ const Dashboard = () => {
           "Une erreur s'est produite lors de la suppression du produit : ",
           error
         );
-        // Afficher un message d'erreur si la suppression échoue
-        setFlashMessage(
+        setMessageFlash(
           "Une erreur s'est produite lors de la suppression du produit."
         );
       });
   };
 
-  const handleSelectOeuvre = (oeuvre) => {
-    setSelectedOeuvre(oeuvre);
+  const selectionnerOeuvre = (oeuvre) => {
+    setOeuvreSelectionnee(oeuvre);
   };
 
-  const filteredProducts = (() => {
-    if (selectedOeuvre) {
-      return products.filter(
-        (product) => product.oeuvres?.id === selectedOeuvre.id
+  const produitsFiltres = (() => {
+    if (oeuvreSelectionnee) {
+      return produits.filter(
+        (produit) => produit.oeuvres?.id === oeuvreSelectionnee.id
       );
     }
   })();
 
   return (
     roles.includes("ROLE_ADMIN") && (
-
-      <div className="w-full flex flex-row bg-bleuDark">
+      <div className="w-full flex flex-row bg-bleuFonce">
         <NavAdmin />
         <div className="w-full flex flex-col justify-center items-center">
           <div className="w-full h-96 bg-bgAdmin bg-no-repeat bg-cover bg-center">
@@ -107,14 +98,14 @@ const Dashboard = () => {
           <div className="flex justify-between w-10/12">
             <div className="bg-white h-fit bg-opacity-10 w-1/4 flex flex-col my-20  items-center">
               <div className="bg-nav opacity-100 w-10/12 mt-10 mb-1 py-1 text-white flex items-center justify-around text-center">
-                Nouvelle oeuvres <img className="py-2" src={createV} alt="" />
+                Nouvelles oeuvres <img className="py-2" src={createV} alt="" />
               </div>
               <div className="w-full flex flex-col items-center mb-10">
                 {oeuvres ? (
                   oeuvres.map((oeuvre, index) => (
                     <div
                       key={index}
-                      onClick={() => handleSelectOeuvre(oeuvre)}
+                      onClick={() => selectionnerOeuvre(oeuvre)}
                       className="cursor-pointer w-10/12 text-center"
                     >
                       <OeuvresAdmin oeuvre={oeuvre} />
@@ -127,38 +118,38 @@ const Dashboard = () => {
             </div>
 
             <div className="bg-white bg-opacity-10 w-2/3 flex flex-col justify-start items-center my-20 text-white">
-              {flashMessage && (
+              {messageFlash && (
                 <div className="bg-green-500 text-white px-4 py-2 mt-4">
-                  {flashMessage}
+                  {messageFlash}
                 </div>
               )}
               <div className="opacity-100 w-10/12 mt-10 mb-1 py-1">
                 <div className="flex justify-between items-center w-full mb-2 px-3 bg-nav">
                   <h3>Liste de produits</h3>
-                  <NavLink to="/dashboard/create">
+                  <NavLink to="/dashboard/creer">
                     <div className="flex flex-row-reverse pr-7 gap-1 items-center rounded-md">
                       <img src={createV} className="py-2" alt="logo_create" />
                     </div>
                   </NavLink>
                 </div>
                 <ul className="bg-nav grid grid-cols-8 text-center p-2">
-                  <li>Categorie</li>
+                  <li>Catégorie</li>
                   <li>Oeuvre</li>
                   <li>Nom</li>
                   <li>Type</li>
                   <li>Note</li>
                   <li>Prix</li>
-                  <li>Update</li>
-                  <li>Delete</li>
+                  <li>Mise à jour</li>
+                  <li>Supprimer</li>
                 </ul>
               </div>
-              {selectedOeuvre ? (
-                filteredProducts.length > 0 ? (
-                  filteredProducts.map((product, index) => (
+              {oeuvreSelectionnee ? (
+                produitsFiltres.length > 0 ? (
+                  produitsFiltres.map((produit, index) => (
                     <PanelAdmin
-                      product={product}
+                      produit={produit}
                       key={index}
-                      onDelete={() => handleDelete(product.id)}
+                      onDelete={() => supprimerProduit(produit.id)}
                     />
                   ))
                 ) : (
@@ -175,5 +166,4 @@ const Dashboard = () => {
   );
 };
 
-
-export default Dashboard;
+export default TableauDeBord;

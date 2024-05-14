@@ -1,36 +1,37 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom"; // Import NavLink
 import Logo from "../../assets/Logo.svg";
 
 const Footer = () => {
-  const [date, setDate] = useState(new Date())
+  const [date] = useState(new Date());
 
   return (
     <footer>
       <nav className="bg-nav h-16 w-full ">
         <div className="flex justify-around h-full items-center text-white">
           <div className="">
-            <a href="/">
+            <NavLink to="/"> {/* Change here */}
               <img src={Logo} className="w-16 h-12" alt="logo" />
-            </a>
+            </NavLink>
           </div>
           <div className="w-96">
             <ul className="hidden lg:flex w-full justify-between text-xs">
-              <a href="/src/index.html">
+              <NavLink to="/accueil"> {/* Change here */}
                 <li className="hovertext-lavande">Accueil</li>
-              </a>
-              <a href="#">
+              </NavLink>
+              <NavLink to="/catalogue"> {/* Change here */}
                 <li className="hovertext-lavande">Catalogue</li>
-              </a>
-              <a href="#">
+              </NavLink>
+              <NavLink to="/contact"> {/* Change here */}
                 <li className="hovertext-lavande">Contact</li>
-              </a>
+              </NavLink>
             </ul>
           </div>
           <p className="text-gray-500">
             Copyright {date.getFullYear()} All rights reserved |{" "}
-            <a href="" className="hovertext-lavande">
+            <NavLink to="/confidentialite" className="hovertext-lavande"> {/* Change here */}
               Condition de confidentialité
-            </a>
+            </NavLink>
           </p>
         </div>
       </nav>
