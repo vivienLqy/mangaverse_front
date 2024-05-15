@@ -13,7 +13,7 @@ const BurgerMenu = () => {
   };
 
   return (
-    <div className="sm:hidden burger-menu  mr-5">
+    <div className="md:flex burger-menu  mr-5">
       <button
         className={`burger-icon ${isOpen ? "open" : ""
           } flex flex-col justify-between h-6 w-8`}

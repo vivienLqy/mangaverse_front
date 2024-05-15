@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from "../../assets/Logo.svg";
+import Logo from "../assets/Logo.svg";
 import { NavLink } from 'react-router-dom';
 
 const NavAdmin = () => {

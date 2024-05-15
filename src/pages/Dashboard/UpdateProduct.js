@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import NavAdmin from "../../components/wrapper/NavAdmin";
+import NavAdmin from "../../components/NavAdmin";
 import { useParams, useNavigate } from "react-router-dom";
 
 const UpdateProduct = () => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PanelAdmin from "../../components/admin/PanelAdmin";
-import NavAdmin from "../../components/wrapper/NavAdmin";
+import NavAdmin from "../../components/NavAdmin";
 import OeuvresAdmin from "../../components/admin/OeuvresAdmin";
 import createV from "../../assets/createGreen.svg";
 import { NavLink } from "react-router-dom";

@@ -1,4 +1,4 @@
-import Card from "../components/Card";
+
 import CarouselRecent from "../components/CarouselRecent";
 import CarouselRate from "../components/CarouselRate";
 
@@ -13,7 +13,6 @@ const Accueil = () => {
           <CarouselRecent />
         </div>
         <div className="lg:hidden">
-          <Card />
         </div>
       </div>
 
@@ -40,7 +39,7 @@ const Accueil = () => {
             reste inchangé.
           </p>
         </div>
-        <div className=" text-white pl-6">
+        <div className="lg:block oui text-white pl-6 md:hidden">
           <h2 className=" text-blue-300 text-center font-black">
             Acheter des mangas
           </h2>

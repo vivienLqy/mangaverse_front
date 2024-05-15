@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import NavAdmin from "../../components/wrapper/NavAdmin";
+import NavAdmin from "../../components/NavAdmin";
 import { useNavigate } from "react-router-dom";
 
 const CreateAdmin = () => {

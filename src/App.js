@@ -1,5 +1,6 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { isAuthenticated, isAdmin } from "./components/Auth";
 import Accueil from "./pages/Accueil";
 import Wrapper from "./components/wrapper";
 import Contact from "./pages/Contact";
@@ -25,12 +26,17 @@ function App() {
           <Route path="/monproduit/:id" element={<MonProduit />} />
           <Route path="/connexion" element={<Login />} />
           <Route path="/register" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/update/product/:id" element={<UpdateProduct />} />
-          <Route path="/dashboard/update/oeuvre/:id" element={<UpdateOeuvre />} />
-          <Route path="/dashboard/create/" element={<CreateAdmin />} />
+          <Route
+            path="/dashboard"
+            element={isAdmin() ? <Dashboard /> : <Navigate to="/" />}
+          />
+          <Route path="/dashboard/update/product/:id"
+            element={isAdmin() ? <UpdateProduct /> : <Navigate to="/" />} />
+          <Route path="/dashboard/update/oeuvre/:id"
+            element={isAdmin() ? <UpdateOeuvre /> : <Navigate to="/" />} />
+          <Route path="/dashboard/create/"
+            element={isAdmin() ? <CreateAdmin /> : <Navigate to="/" />} />
           <Route path="/monprofil" element={<Monprofil />} />
-
           <Route path="*" element={<Accueil />} />
         </Routes>
       </Wrapper>
