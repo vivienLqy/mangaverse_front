@@ -35,7 +35,7 @@ const MonProduit = () => {
   );
 
   useEffect(() => {
-    if (selectedProduct && selectedProduct.picture) {
+    if (selectedProduct?.picture) {
       axios
         .get(`http://localhost:8000/api/img/manga/${selectedProduct.picture}`)
         .then((res) => {
@@ -52,14 +52,10 @@ const MonProduit = () => {
 
   return (
     <section className="bg-bleuDark text-white">
-      <div className="flex w-1/2 m-auto mt-10 ">
+      <div className="flex w-1/2 m-auto ">
         <div className="">
           <img
-            src={
-              selectedProduct && selectedProduct.picture
-                ? `http://localhost:8000/api/img/manga/${selectedProduct.picture}`
-                : 'placeholder_image_url_here'
-            }
+            src={`http://localhost:8000/api/img/manga/${selectedProduct.picture}`} // Utilisation de productImage pour afficher l'image
             alt={productImage}
             className="w-44"
           />
