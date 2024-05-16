@@ -52,7 +52,7 @@ const MonProduit = () => {
 
   return (
     <section className="bg-bleuDark text-white">
-      <div className="flex w-1/2 m-auto ">
+      <div className="flex w-1/2 m-auto mt-8">
         <div className="">
           <img
             src={
@@ -60,7 +60,7 @@ const MonProduit = () => {
                 ? `http://localhost:8000/api/img/manga/${selectedProduct.picture}`
                 : 'placeholder_image_url_here'
             }
-            alt={productImage}
+            alt={selectedProduct.picture}
             className="w-44"
           />
         </div>
