@@ -60,7 +60,7 @@ const MonProduit = () => {
                 ? `http://localhost:8000/api/img/manga/${selectedProduct.picture}`
                 : 'placeholder_image_url_here'
             }
-            alt={selectedProduct.picture}
+            alt={productImage}
             className="w-44"
           />
         </div>
