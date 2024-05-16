@@ -96,12 +96,12 @@ const CreateAdmin = () => {
             formData.append('oeuvreName', oeuvreName);
 
             try {
-                const response = await axios.post('http://localhost:8000/upload-image', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-
-                    }
-                });
+                const response = await
+                    axios.post('http://localhost:8000/upload-image', formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    });
 
                 if (response.status === 201) {
                     console.log('Image uploaded successfully');
@@ -110,7 +110,7 @@ const CreateAdmin = () => {
                     setPicture(imagePath);
                     console.log(picture);
 
-                    axios.post(`http://localhost:8000/api/products`, {
+                    axios.post(`http://localhost:8000/api/oeuvres/`, {
                         name: name,
                         prix: prix,
                         quantiter: quantiter,

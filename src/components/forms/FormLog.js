@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/Logo.svg";
 import axios from "axios";
-
+import ReCAPTCHA from "react-google-recaptcha"
+//6Lfi0d4pAAAAAJ5J7KO-bl0I1g8TTLZ3tCX2xuOc
 const FormLog = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [capVal, setCapVal] = useState(null);
   const [registrationEmail, setRegistrationEmail] = useState("");
   const [registrationPassword, setRegistrationPassword] = useState("");
   const [registrationConfirmPassword, setRegistrationConfirmPassword] =
@@ -77,32 +79,40 @@ const FormLog = () => {
           </div>
           <h1 className=" text-red-600 font-bold text-xl p-4">Connexion</h1>
           {error && <p className="text-red-600">{error}</p>}
-          <form onSubmit={handleLoginSubmit} method="POST">
-            <div className="">
+          <form onSubmit={handleLoginSubmit} method="POST" className="">
+            <div className="flex justify-center">
               <input
                 type="email"
                 name=""
                 id=""
                 placeholder="email"
-                className="p-2 rounded-lg text-center bg-orange-200"
+                className="p-2 rounded-lg w-full text-center"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="">
+            <div className="flex justify-center">
               <input
                 type="password"
                 name=""
                 id=""
                 placeholder="password"
-                className="p-2 my-4 rounded-lg  text-center bg-orange-200"
+                className="p-2 my-4 rounded-lg w-full  text-center"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className=" p-2 bg-blue-400 rounded-xl">
-              Se connecter
-            </button>
+            <ReCAPTCHA
+              className="flex justify-center"
+              sitekey="6Lfi0d4pAAAAAJ5J7KO-bl0I1g8TTLZ3tCX2xuOc"
+              onChange={val => setCapVal(val)}
+
+            />
+            <div className="flex justify-center my-5">
+              <button disabled={!capVal} type="submit" className=" p-2 bg-blue-400 rounded-xl">
+                Se connecter
+              </button>
+            </div>
           </form>
           <p className="text-blue-400 font-bold">
             Vous n'avez pas encore de compte ?
@@ -132,7 +142,7 @@ const FormLog = () => {
                 placeholder="email"
                 value={registrationEmail}
                 onChange={(e) => setRegistrationEmail(e.target.value)}
-                className="p-2 rounded-lg text-center w-full bg-orange-200"
+                className="p-2 rounded-lg text-center w-full"
               />
             </div>
             <div className="flex gap-2 my-4">
@@ -142,7 +152,7 @@ const FormLog = () => {
                   name=""
                   id=""
                   placeholder="Nom"
-                  className="p-2 rounded-lg text-center bg-orange-200"
+                  className="p-2 rounded-lg text-center"
                 />
               </div>
               <div className="">
@@ -151,7 +161,7 @@ const FormLog = () => {
                   name=""
                   id=""
                   placeholder="Prenom"
-                  className="p-2 rounded-lg text-center bg-orange-200"
+                  className="p-2 rounded-lg text-center"
                 />
               </div>
             </div>
@@ -163,7 +173,7 @@ const FormLog = () => {
                 placeholder="Mot de passe"
                 value={registrationPassword}
                 onChange={(e) => setRegistrationPassword(e.target.value)}
-                className="p-2  rounded-lg  text-center w-full bg-orange-200"
+                className="p-2  rounded-lg  text-center w-full"
               />
             </div>
             <div className="">
@@ -174,10 +184,16 @@ const FormLog = () => {
                 placeholder="Confirmation du mot de passe"
                 value={registrationConfirmPassword}
                 onChange={(e) => setRegistrationConfirmPassword(e.target.value)}
-                className="p-2 my-3  rounded-lg  text-center w-full bg-orange-200"
+                className="p-2 my-3  rounded-lg  text-center w-full"
               />
             </div>
-            <button type="submit" className=" p-2 bg-blue-400 rounded-xl">
+            <ReCAPTCHA
+              className="flex justify-center"
+              sitekey="6Lfi0d4pAAAAAJ5J7KO-bl0I1g8TTLZ3tCX2xuOc"
+              onChange={val => setCapVal(val)}
+
+            />
+            <button disabled={!capVal} type="submit" className=" p-2 bg-blue-400 rounded-xl">
               S'inscrire
             </button>
           </form>

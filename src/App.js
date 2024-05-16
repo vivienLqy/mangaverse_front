@@ -37,7 +37,6 @@ function App() {
           <Route path="/dashboard/create/"
             element={isAdmin() ? <CreateAdmin /> : <Navigate to="/" />} />
           <Route path="/monprofil" element={<Monprofil />} />
-          <Route path="*" element={<Accueil />} />
         </Routes>
       </Wrapper>
     </BrowserRouter>
