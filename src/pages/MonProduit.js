@@ -52,7 +52,7 @@ const MonProduit = () => {
 
   return (
     <section className="bg-bleuDark text-white">
-      <div className="flex w-1/2 m-auto mt-8">
+      <div className="flex w-1/2 m-auto mt-10 ">
         <div className="">
           <img
             src={
