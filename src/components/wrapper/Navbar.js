@@ -64,7 +64,7 @@ const Navbar = () => {
                 </NavLink>
               </ul>
             </div>
-            <div className="hidden lg:flex w-28 justify-between size-6">
+            <div className="hidden lg:flex w-28 justify-around size-6">
               {roles !== null && roles.includes("ROLE_ADMIN") && (
                 <NavLink to="/dashboard" className="svg-container">
                   <img src={Dashboard} alt="loupe" />
@@ -92,7 +92,7 @@ const Navbar = () => {
                 </NavLink>
               )}
             </div>
-            <div className="hamburger">
+            <div className="hamburger lg:hidden md:flex">
               <BurgerMenu></BurgerMenu>
             </div>
           </div>

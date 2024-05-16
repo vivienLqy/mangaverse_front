@@ -8,9 +8,9 @@ const Catalogue = () => {
   const [types, setTypes] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
-  const [showDropdown, setShowDropdown] = useState(false); // Utiliser un seul état pour gérer l'affichage des dropdowns
-  const [dropdownType, setDropdownType] = useState(""); // Ajouter un état pour suivre le type de dropdown ouvert
-  const [searchText, setSearchText] = useState(""); // Ajout de l'état pour le texte de recherche
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [dropdownType, setDropdownType] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     axios
@@ -51,27 +51,11 @@ const Catalogue = () => {
       .catch((error) => {
         console.error("Une erreur s'est produite lors de la récupération des types : ", error);
       });
-    axios
-      .get("http://localhost:8000/api/img/manga", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
-      })
-      .then((res) => {
-        // Stocker les données d'images récentes dans l'état local
-        setOeuvres(res.data);
-      })
-      .catch((error) => {
-        console.error(
-          "Une erreur s'est produite lors de la récupération des images : ",
-          error
-        );
-      });
   }, []);
 
   const handleDropdownToggle = (dropdown) => {
     setShowDropdown(!showDropdown);
-    setDropdownType(dropdown); // Mettre à jour le type de dropdown ouvert
+    setDropdownType(dropdown);
   };
 
   const handleGenreSelect = (genre) => {
@@ -90,15 +74,14 @@ const Catalogue = () => {
     setShowDropdown(false);
   };
 
-  // Fonction de recherche pour filtrer les oeuvres en fonction du texte saisi
   const searchOeuvre = (value) => {
     setSearchText(value);
-    // Réinitialiser le genre sélectionné à null lorsque le texte de recherche est vide
     if (value === "") {
       setSelectedGenre(null);
       setSelectedType(null);
     }
   };
+  console.log(oeuvres);
 
   const filteredOeuvres = oeuvres.filter((oeuvre) => {
     const matchesGenre = selectedGenre ? oeuvre.genres.some((genre) => genre.name === selectedGenre.name) : true;
