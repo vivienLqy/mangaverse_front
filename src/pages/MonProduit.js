@@ -48,7 +48,7 @@ const MonProduit = () => {
           );
         });
     }
-  }, [selectedProduct?.picture]);
+  }, [selectedProduct?.picture, selectedProduct]);
 
   return (
     <section className="bg-bleuDark text-white">
