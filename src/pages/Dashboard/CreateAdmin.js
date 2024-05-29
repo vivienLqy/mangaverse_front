@@ -56,10 +56,11 @@ const CreateAdmin = () => {
     }, []);
 
     const navigate = useNavigate();
+    console.log(picture);
 
-    // const handleImageChange = (e) => {
-    //     setSelectedImage(e.target.files[0]);
-    // };
+    const handleImageChange = (e) => {
+        setSelectedImage(e.target.files[0]);
+    };
 
     const converToBase64 = (e) => {
         console.log(e);
@@ -96,21 +97,19 @@ const CreateAdmin = () => {
             formData.append('oeuvreName', oeuvreName);
 
             try {
-                const response = await
-                    axios.post('http://localhost:8000/upload-image', formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    });
+                const response = await axios.post('http://localhost:8000/upload-image', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
 
                 if (response.status === 201) {
                     console.log('Image uploaded successfully');
 
                     const imagePath = response.data
                     setPicture(imagePath);
-                    console.log(picture);
 
-                    axios.post(`http://localhost:8000/api/oeuvres/`, {
+                    axios.post(`http://localhost:8000/api/products`, {
                         name: name,
                         prix: prix,
                         quantiter: quantiter,
@@ -144,7 +143,7 @@ const CreateAdmin = () => {
         } else {
             console.error("Veuillez sélectionner une catégorie, une œuvre et un type");
         }
-    }, [categorieId, categories, name, navigate, oeuvreId, oeuvres, prix, quantiter, typeId, types, selectedImage, picture]);
+    }, [categorieId, categories, name, navigate, oeuvreId, oeuvres, prix, quantiter, typeId, types, selectedImage]);
 
     const handleCancel = () => {
         navigate("/dashboard");
@@ -218,7 +217,7 @@ const CreateAdmin = () => {
                                         onChange={converToBase64}
                                         className="bg-transparent w-full p-2"
                                     />
-                                    {selectedImage === "" || selectedImage === null ? "" : <img width={100} height={100} src={selectedImage} alt="img selectionner" />}
+                                    {selectedImage === "" || selectedImage === null ? "" : <img width={100} height={100} src={selectedImage} />}
                                 </div>
                                 <div className="bg-blackOP30 mb-4 text-center">
                                     <input

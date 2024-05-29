@@ -72,10 +72,7 @@ const UpdateProduct = () => {
                   </div>
                   <div id="oui" className="flex flex-col justify-between items-center w-full">
                     <img
-                      src={`/img/manga/${selectedProduct?.oeuvres?.name.replace(
-                        /\s+/g,
-                        ""
-                      )}/${selectedProduct?.picture}`}
+                      src={`http://localhost:8000/api/img/manga/${selectedProduct.picture}`}
                       alt="One piece"
                       className="mt-1"
                     />
