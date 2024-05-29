@@ -80,7 +80,7 @@ const Navbar = () => {
                   </NavLink>
                   <NavLink
                     onClick={logout}
-                    to="/connexion"
+                    to="/"
                     className="svg-container"
                   >
                     <img src={Logout} alt="deconnexion" />
