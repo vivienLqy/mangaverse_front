@@ -123,19 +123,21 @@ const FormLog = () => {
               />
             </div>
             <div className="flex justify-center relative">
-              <input
-                type={eyes ? "text" : "password"}
-                placeholder="password"
-                className="p-2 my-4 rounded-lg w-full text-center"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <img
-                src={eye}
-                alt="show password"
-                className="w-5 absolute right-2 top-1 cursor-pointer"
-                onClick={showPwd}
-              />
+              <div className="flex items-center w-full relative">
+                <input
+                  type={eyes ? "text" : "password"}
+                  placeholder="password"
+                  className="p-2 my-4 rounded-lg w-full text-center pr-10"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <img
+                  src={eye}
+                  alt="show password"
+                  className="w-5 absolute right-3 cursor-pointer"
+                  onClick={showPwd}
+                />
+              </div>
             </div>
             <ReCAPTCHA
               className="flex justify-center"
@@ -162,7 +164,7 @@ const FormLog = () => {
   if (currentUrl === "/register") {
     return (
       <section>
-        <div className="flex flex-col items-center bg-blue-900 bg-opacity-80 p-10 text-center">
+        <div className="flex flex-col items-center bg-blue-900 bg-opacity-80 p-28 text-center">
           <div className="">
             <img src={Logo} alt="logo" />
           </div>
@@ -192,7 +194,7 @@ const FormLog = () => {
                 <img
                   src={eye}
                   alt="show password"
-                  className="w-5 absolute right-2 top-1 cursor-pointer"
+                  className="w-5 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                   onClick={showPwd}
                 />
               </div>
