@@ -58,10 +58,6 @@ const CreateAdmin = () => {
     const navigate = useNavigate();
     console.log(picture);
 
-    const handleImageChange = (e) => {
-        setSelectedImage(e.target.files[0]);
-    };
-
     const converToBase64 = (e) => {
         console.log(e);
         var reader = new FileReader();
