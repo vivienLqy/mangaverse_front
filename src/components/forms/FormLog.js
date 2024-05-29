@@ -60,6 +60,7 @@ const FormLog = () => {
       );
       if (response.data && response.data.token) {
         storeToken(response.data.token);
+        window.location.href = "/";
       } else {
         setError("Identifiants de connexion invalides.");
       }
@@ -87,6 +88,7 @@ const FormLog = () => {
         });
         if (response.status === 200) {
           console.log("User registered successfully!");
+          window.location.href = "/connexion";
         }
       } catch (error) {
         setError("L'inscription a échoué. Veuillez réessayer.");
@@ -136,13 +138,13 @@ const FormLog = () => {
                 />
               </div>
             </div>
-            {/* <ReCAPTCHA
+            <ReCAPTCHA
               className="flex justify-center"
               sitekey="6LeX5-spAAAAAKKZB2p-K6OsoXKa0L-UlAyN_cPT"
               onChange={val => setCapVal(val)}
-            /> */}
+            />
             <div className="flex justify-center my-5">
-              <button type="submit" className="p-2 bg-blue-400 rounded-xl">
+              <button disabled={!capVal} type="submit" className="p-2 bg-blue-400 rounded-xl">
                 Se connecter
               </button>
             </div>
@@ -221,7 +223,7 @@ const FormLog = () => {
           </form>
           <p className="text-blue-400 font-bold">
             Déja un compte ?
-            <NavLink to="/connexion">
+            <NavLink to="/">
               <strong className="text-red-700">Connectez-vous</strong>
             </NavLink>
           </p>
