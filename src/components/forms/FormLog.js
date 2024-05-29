@@ -140,7 +140,7 @@ const FormLog = () => {
             </div>
             <ReCAPTCHA
               className="flex justify-center"
-              sitekey="6Lfi0d4pAAAAAJ5J7KO-bl0I1g8TTLZ3tCX2xuOc"
+              sitekey="6LeX5-spAAAAAKKZB2p-K6OsoXKa0L-UlAyN_cPT"
               onChange={val => setCapVal(val)}
             />
             <div className="flex justify-center my-5">
@@ -214,7 +214,7 @@ const FormLog = () => {
             </div>
             <ReCAPTCHA
               className="flex justify-center"
-              sitekey="6Lfi0d4pAAAAAJ5J7KO-bl0I1g8TTLZ3tCX2xuOc"
+              sitekey="6LeX5-spAAAAAKKZB2p-K6OsoXKa0L-UlAyN_cPT"
               onChange={val => setCapVal(val)}
             />
             <button disabled={!capVal} type="submit" className="bg-orange-500 rounded-xl p-2 mt-2">
