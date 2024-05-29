@@ -58,6 +58,10 @@ const CreateAdmin = () => {
     const navigate = useNavigate();
     console.log(picture);
 
+    const handleImageChange = (e) => {
+        setSelectedImage(e.target.files[0]);
+    };
+
     const converToBase64 = (e) => {
         console.log(e);
         var reader = new FileReader();
@@ -213,7 +217,7 @@ const CreateAdmin = () => {
                                         onChange={converToBase64}
                                         className="bg-transparent w-full p-2"
                                     />
-                                    {selectedImage === "" || selectedImage === null ? "" : <img width={100} height={100} src={selectedImage} />}
+                                    {selectedImage === "" || selectedImage === null ? "" : <img width={100} height={100} src={selectedImage} alt="Preview" />}
                                 </div>
                                 <div className="bg-blackOP30 mb-4 text-center">
                                     <input
