@@ -19,24 +19,23 @@ const FormLog = () => {
   const [error, setError] = useState("");
   const currentUrl = window.location.pathname;
 
-  const regexEmail = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
-  const regexPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,}$/;
-
   useEffect(() => {
+    const regexEmail = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
     if (registrationEmail === "") {
       setValidEmail(null);
     } else {
       setValidEmail(regexEmail.test(registrationEmail));
     }
-  }, [registrationEmail, regexEmail]);
+  }, [registrationEmail]);
 
   useEffect(() => {
+    const regexPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,}$/;
     if (registrationPassword === "") {
       setValidPwd(null);
     } else {
       setValidPwd(regexPwd.test(registrationPassword));
     }
-  }, [registrationPassword, regexPwd]);
+  }, [registrationPassword]);
 
   useEffect(() => {
     if (registrationConfirmPassword === "") {
