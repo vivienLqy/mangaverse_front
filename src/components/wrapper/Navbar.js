@@ -36,7 +36,6 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.clear();
-    window.location.href = "/connexion";
   };
 
   // console.log(roles);
@@ -80,7 +79,7 @@ const Navbar = () => {
                   </NavLink>
                   <NavLink
                     onClick={logout}
-                    to="/"
+                    to="/connexion"
                     className="svg-container"
                   >
                     <img src={Logout} alt="deconnexion" />

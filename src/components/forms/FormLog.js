@@ -138,13 +138,13 @@ const FormLog = () => {
                 />
               </div>
             </div>
-            <ReCAPTCHA
+            {/* <ReCAPTCHA
               className="flex justify-center"
               sitekey="6LeX5-spAAAAAKKZB2p-K6OsoXKa0L-UlAyN_cPT"
               onChange={val => setCapVal(val)}
-            />
+            /> */}
             <div className="flex justify-center my-5">
-              <button disabled={!capVal} type="submit" className="p-2 bg-blue-400 rounded-xl">
+              <button type="submit" className="p-2 bg-blue-400 rounded-xl">
                 Se connecter
               </button>
             </div>
