@@ -60,7 +60,6 @@ const FormLog = () => {
       );
       if (response.data && response.data.token) {
         storeToken(response.data.token);
-        window.location.href = "/";
       } else {
         setError("Identifiants de connexion invalides.");
       }
