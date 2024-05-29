@@ -88,7 +88,7 @@ const FormLog = () => {
         });
         if (response.status === 200) {
           console.log("User registered successfully!");
-          window.location.href = "/connexion";
+          window.location.href = "/";
         }
       } catch (error) {
         setError("L'inscription a échoué. Veuillez réessayer.");
