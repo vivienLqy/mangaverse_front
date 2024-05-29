@@ -28,7 +28,7 @@ const FormLog = () => {
     } else {
       setValidEmail(regexEmail.test(registrationEmail));
     }
-  }, [registrationEmail]);
+  }, [registrationEmail, regexEmail]);
 
   useEffect(() => {
     if (registrationPassword === "") {
@@ -36,7 +36,7 @@ const FormLog = () => {
     } else {
       setValidPwd(regexPwd.test(registrationPassword));
     }
-  }, [registrationPassword]);
+  }, [registrationPassword, regexPwd]);
 
   useEffect(() => {
     if (registrationConfirmPassword === "") {
